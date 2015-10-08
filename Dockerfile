@@ -18,7 +18,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.60-2.b27.el7_1.x86_64
 ENV JENKINS_HOME /var/jenkins_home
 
 COPY bin/swarm-client.sh /usr/local/bin/swarm-client.sh
-
+COPY postStart.sh /var/jenkins_home/postStart.sh
 WORKDIR /var/jenkins_home
 
 
