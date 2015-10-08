@@ -3,14 +3,11 @@ FROM centos:7
 RUN yum install -y docker-1.6.0
 
 RUN yum install -y git wget java-1.8.0-openjdk-devel.x86_64
-RUN cd /usr/local && \
-  wget https://github.com/github/hub/releases/download/v2.2.1/hub-linux-amd64-2.2.1.tar.gz && \
-  tar xf /usr/local/hub-linux-amd64-2.2.1.tar.gz && \
-  rm /usr/local/hub-linux-amd64-2.2.1.tar.gz && \
-  ln -s /usr/local/hub-linux-amd64-2.2.1/hub /usr/bin/hub
 
 RUN curl -sSL -o /usr/share/java/swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/2.0/swarm-client-2.0-jar-with-dependencies.jar
 
+# use hub compiled from source so we can use GIT_TOKEN
+COPY hub /usr/bin/hub
 COPY mvnsettings.xml /root/.m2/settings.xml
 COPY ssh-config /root/.ssh/config
 
