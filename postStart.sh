@@ -15,3 +15,7 @@ if [ -d "/root/.gnupg" ]; then
   chmod 600 /root/.gnupg/trustdb.gpg
   chmod 700 /root/.gnupg
 fi
+
+if [ "$DOCKER_REGISTRY_SERVER_ID" = "docker.io" ]; then
+  docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD -e fabric8-admin@googlegroups.com
+fi
