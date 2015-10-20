@@ -8,4 +8,8 @@ if [ -z $JENKINS_SWARM_LABEL ]; then
     JENKINS_SWARM_LABEL=swarm
 fi
 
-java -jar /usr/share/java/swarm-client.jar -disableSslVerification -master ${JENKINS_MASTER_URL} -labels ${JENKINS_SWARM_LABEL} -labels ${HOSTNAME} -name ${HOSTNAME} $*
+if [ -z $JENKINS_SWARM_EXECUTORS ]; then
+    JENKINS_SWARM_EXECUTORS=1
+fi
+
+java -jar /usr/share/java/swarm-client.jar -disableSslVerification -executors ${JENKINS_SWARM_EXECUTORS} -master ${JENKINS_MASTER_URL} -labels ${JENKINS_SWARM_LABEL} -labels ${HOSTNAME} -name ${HOSTNAME} $*
